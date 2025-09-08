@@ -45,9 +45,6 @@ This is the **SmartAgri Robot Control Center**, a web-based system built using *
 
 ---
 
-## Directory Structure
-----------------------
-
 
 
 
@@ -63,6 +60,7 @@ cd Iot-based-SmartAgri-Robot-Control
 
 
 
+1. **Api url to hardware**
 
 http://192.168.1.15:5000/update_sensor_data?temperature=20&humidity=30&soil_moisture=10
 
