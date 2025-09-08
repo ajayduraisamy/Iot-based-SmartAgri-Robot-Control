@@ -1,0 +1,113 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container-fluid py-4 mt-5">
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-8 col-lg-6">
+          
+            <div class="d-flex justify-content-center mb-4">
+                {% for message in get_flashed_messages() %}
+                <div class="alert alert-success alert-dismissible fade show d-flex align-items-center shadow-sm"
+                    role="alert" style="width: fit-content;">
+                    <i class="bi bi-check-circle-fill me-2"></i>
+                    <div>{{ message }}</div>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                {% endfor %}
+            </div>
+              <h3 class="text-center"> Control Panel</h3>
+           
+            <div class="card border-0 shadow-lg rounded-4">
+                <div class="card-body p-4">
+                   
+                    <form action="{{ url_for('controls') }}" method="POST" id="controlForm">
+                        <div class="d-flex justify-content-center align-items-center flex-column">
+                           
+                            <button name="value" value="1" class="btn btn-control btn-front rounded-pill mb-3 p-3">
+                                <i class="bi bi-arrow-up-circle fs-1"></i>
+                                <span class="d-block mt-1">Front</span>
+                            </button>
+
+                            
+                            <div class="d-flex justify-content-center mb-3">
+                                <button name="value" value="3" class="btn btn-control btn-left rounded-pill me-3 p-3">
+                                    <i class="bi bi-arrow-left-circle fs-1"></i>
+                                    <span class="d-block mt-1">Left</span>
+                                </button>
+                                <div
+                                    class="center-circle rounded-circle bg-dark d-flex align-items-center justify-content-center mx-4">
+                                    <i class="bi bi-power text-white fs-3"></i>
+                                </div>
+                                <button name="value" value="4" class="btn btn-control btn-right rounded-pill ms-3 p-3">
+                                    <i class="bi bi-arrow-right-circle fs-1"></i>
+                                    <span class="d-block mt-1">Right</span>
+                                </button>
+                            </div>
+
+                           
+                            <button name="value" value="2" class="btn btn-control btn-back rounded-pill mt-3 p-3">
+                                <i class="bi bi-arrow-down-circle fs-1"></i>
+                                <span class="d-block mt-1">Back</span>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+          
+
+           
+        </div>
+    </div>
+</div>
+
+<style>
+    .btn-control {
+      
+        width: 120px;
+        height: 120px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.2s ease;
+        border: none;
+    }
+
+    .btn-front {
+        background: linear-gradient(145deg, #4CAF50, #2E7D32);
+        color: white;
+    }
+
+    .btn-back {
+        background: linear-gradient(145deg, #F44336, #C62828);
+        color: white;
+    }
+
+    .btn-left,
+    .btn-right {
+        background: linear-gradient(145deg, #2196F3, #1565C0);
+        color: white;
+    }
+
+    .btn-control:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    .btn-control:active {
+        transform: translateY(1px);
+    }
+
+    .center-circle {
+        width: 70px;
+        height: 70px;
+    }
+
+    .card {
+        background: linear-gradient(135deg, #f2b7b7 0%, #faed92 100%);
+    }
+</style>
+
+
+{% endblock %}

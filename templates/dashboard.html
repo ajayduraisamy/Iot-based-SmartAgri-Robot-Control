@@ -1,0 +1,151 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container-fluid py-5 mt-5" style="min-height: 80vh;">
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-8 col-lg-6">
+
+    
+            <div class="text-center mb-5">
+                <h2 class="fw-bold mb-3">Smart Agriculture Dashboard</h2>
+                
+            </div>
+
+            <div class="d-flex justify-content-center mb-5">
+                {% for message in get_flashed_messages() %}
+                <div class="alert alert-premium-success alert-dismissible fade show d-flex align-items-center"
+                    role="alert">
+                    <i class="bi bi-check-circle-fill me-2"></i>
+                    <div>{{ message }}</div>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="alert"
+                        aria-label="Close"></button>
+                </div>
+                {% endfor %}
+            </div>
+
+            
+            <form action="{{ url_for('dashboard') }}" method="POST">
+                <div class="d-flex flex-column align-items-center gap-4">
+
+                 
+                    <button name="value" value="1" class="btn-premium btn-premium-primary">
+                        <i class="bi bi-seedling me-2"></i>Seed Sowing
+                    </button>
+
+                 
+                    <div class="d-flex justify-content-center gap-4">
+                        <button name="value" value="3" class="btn-premium btn-premium-warning">
+                            <i class="bi bi-flower1 me-2"></i>Fertilizing
+                        </button>
+                        <button name="value" value="2" class="btn-premium btn-premium-success">
+                            <i class="bi bi-droplet me-2"></i>Watering
+                        </button>
+                    </div>
+
+                   
+                    <button name="value" value="4" class="btn-premium btn-premium-danger">
+                        <i class="bi bi-basket me-2"></i>Harvesting
+                    </button>
+
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+
+<style>
+ 
+
+    .status-indicator {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        display: inline-block;
+        animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+        0% {
+            opacity: 1;
+        }
+
+        50% {
+            opacity: 0.5;
+        }
+
+        100% {
+            opacity: 1;
+        }
+    }
+
+    .btn-premium {
+        padding: 1.2rem 2rem;
+        border: none;
+        border-radius: 12px;
+        font-weight: 600;
+        font-size: 1.1rem;
+        transition: all 0.3s ease;
+        width: 200px;
+        text-align: center;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .btn-premium:before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+        transition: 0.5s;
+    }
+
+    .btn-premium:hover:before {
+        left: 100%;
+    }
+
+    .btn-premium:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    .btn-premium:active {
+        transform: translateY(1px);
+    }
+
+    .btn-premium-primary {
+        background: linear-gradient(145deg, #3498db, #2980b9);
+        color: white;
+    }
+
+    .btn-premium-success {
+        background: linear-gradient(145deg, #2ecc71, #27ae60);
+        color: white;
+        width: 150px !important;
+    }
+
+    .btn-premium-warning {
+        background: linear-gradient(145deg, #f39c12, #e67e22);
+        color: white;
+        width: 150px !important;
+    }
+
+    .btn-premium-danger {
+        background: linear-gradient(145deg, #e74c3c, #c0392b);
+        color: white;
+    }
+
+    .alert-premium-success {
+        background: rgba(25, 135, 84, 0.2);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(25, 135, 84, 0.3);
+        color: #fff;
+        border-radius: 12px;
+    }
+</style>
+
+{% endblock %}

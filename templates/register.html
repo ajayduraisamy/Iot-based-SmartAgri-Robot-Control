@@ -1,0 +1,335 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8 col-lg-6">
+      
+      <div class="form-container premium-card position-relative overflow-hidden">
+        
+        <div class="position-absolute top-0 end-0 mt-3 me-4">
+          <i class="bi bi-person-plus-fill text-primary opacity-25" style="font-size: 2.5rem;"></i>
+        </div>
+
+        <h2 class="text-center mb-4 fw-bold position-relative">
+          <span class="bg-orange px-3" style="z-index: 1; position: relative;">Create Your Account</span>
+          <span class="position-absolute top-50 start-0 end-0 border-top" style="z-index: 0;"></span>
+        </h2>
+
+        {% for message in get_flashed_messages() %}
+        <div class="alert alert-warning alert-dismissible fade show d-flex align-items-center" role="alert">
+          <i class="bi bi-exclamation-triangle-fill me-2"></i>
+          <div>{{ message }}</div>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        {% endfor %}
+
+        <form method="POST" enctype="multipart/form-data" novalidate class="needs-validation">
+          <div class="mb-4">
+            <label for="name" class="form-label fw-semibold">Full Name <span class="text-danger">*</span></label>
+            <div class="input-group">
+              <span class="input-group-text bg-light border-end-0"><i class="bi bi-person"></i></span>
+              <input type="text" id="name" name="name" class="form-control form-control-lg border-start-0" required
+                pattern="[A-Za-z\s]+" placeholder="Enter your full name">
+            </div>
+            <div class="invalid-feedback ms-4">Please enter a valid name (letters only).</div>
+          </div>
+
+          <div class="mb-4">
+            <label for="email" class="form-label fw-semibold">Email Address <span class="text-danger">*</span></label>
+            <div class="input-group">
+              <span class="input-group-text bg-light border-end-0"><i class="bi bi-envelope"></i></span>
+              <input type="email" id="email" name="email" class="form-control form-control-lg border-start-0" required
+                placeholder="Enter your email address">
+            </div>
+            <div class="invalid-feedback ms-4">Please enter a valid email address.</div>
+          </div>
+
+          <div class="mb-4">
+            <label for="number" class="form-label fw-semibold">Phone Number <span class="text-danger">*</span></label>
+            <div class="input-group">
+              <span class="input-group-text bg-light border-end-0"><i class="bi bi-phone"></i></span>
+              <input type="text" id="number" name="number" class="form-control form-control-lg border-start-0" required
+                pattern="[0-9]{10}" placeholder="Enter your 10-digit phone number">
+            </div>
+            <div class="invalid-feedback ms-4">Please enter a valid 10-digit phone number.</div>
+          </div>
+
+          <div class="mb-4">
+            <label for="password" class="form-label fw-semibold">Password <span class="text-danger">*</span></label>
+            <div class="input-group">
+              <span class="input-group-text bg-light border-end-0"><i class="bi bi-lock"></i></span>
+              <input type="password" id="password" name="password" class="form-control form-control-lg border-start-0"
+                required minlength="6" placeholder="Create a secure password">
+              <button class="btn btn-outline-secondary toggle-password" type="button">
+                <i class="bi bi-eye"></i>
+              </button>
+            </div>
+            <div class="invalid-feedback ms-4">Password must be at least 6 characters long.</div>
+            <div class="password-strength mt-2">
+              <div class="progress" style="height: 5px;">
+                <div class="progress-bar" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0"
+                  aria-valuemax="100"></div>
+              </div>
+              <small class="text-muted password-strength-text">Password strength</small>
+            </div>
+          </div>
+
+          <div class="mb-4">
+            <label for="profile_image" class="form-label fw-semibold">Profile Picture <span
+                class="text-danger">*</span></label>
+            <div class="file-upload-container border rounded-3 p-3 text-center">
+              <i class="bi bi-cloud-arrow-up fs-1 text-muted d-block mb-2"></i>
+              <p class="mb-2">Drag & drop your image here or click to browse</p>
+              <input type="file" id="profile_image" name="profile_image" class="form-control d-none" accept="image/*"
+                required>
+              <label for="profile_image" class="btn btn-outline-primary btn-sm">Select Image</label>
+              <div class="file-name mt-2 small text-muted">No file selected</div>
+            </div>
+            <div class="invalid-feedback">Please upload a profile image.</div>
+            <div class="form-text">Supported formats: JPG, PNG, GIF. Max size: 5MB.</div>
+          </div>
+
+          <div class="form-check mb-4">
+            <input class="form-check-input" type="checkbox" id="terms" required>
+            <label class="form-check-label" for="terms">
+              I agree to the <a href="#" class="text-decoration-none">Terms of Service</a> and <a href="#"
+                class="text-decoration-none">Privacy Policy</a>
+            </label>
+            <div class="invalid-feedback">You must agree before submitting.</div>
+          </div>
+
+          <button type="submit" class="btn btn-premium btn-lg w-100 py-3 fw-bold rounded-3">
+            <i class="bi bi-person-plus me-2"></i> Create Account
+          </button>
+
+          <div class="text-center mt-4 pt-3 border-top">
+            <p class="mb-0">Already have an account? <a href="{{ url_for('login') }}"
+                class="text-decoration-none fw-bold">Sign In</a></p>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .form-container {
+    padding: 2.5rem;
+    border-radius: 16px;
+    background: white;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+  }
+
+  [data-bs-theme="dark"] .form-container {
+    background: #24272d;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+  }
+
+  .form-title {
+    color: #2c3e50;
+    font-weight: 700;
+  }
+
+  [data-bs-theme="dark"] .form-title {
+    color: #ecf0f1;
+  }
+
+  .form-control {
+    border: 1px solid #dee2e6;
+    border-radius: 10px;
+    padding: 0.75rem 1rem;
+    transition: all 0.3s ease;
+  }
+
+  .form-control:focus {
+    border-color: #27ae60;
+    box-shadow: 0 0 0 0.25rem rgba(39, 174, 96, 0.25);
+  }
+
+  .input-group-text {
+    border-radius: 10px 0 0 10px !important;
+    background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+  }
+
+  [data-bs-theme="dark"] .input-group-text {
+    background: linear-gradient(135deg, #2c3e50, #34495e);
+    color: #ecf0f1;
+    border-color: #34495e;
+  }
+
+  .border-start-0 {
+    border-left: 0 !important;
+  }
+
+  .border-end-0 {
+    border-right: 0 !important;
+  }
+
+  .invalid-feedback {
+    display: none;
+    font-size: 0.875rem;
+  }
+
+  .was-validated .form-control:invalid~.invalid-feedback,
+  .was-validated .form-control:invalid~.invalid-tooltip,
+  .form-control.is-invalid~.invalid-feedback,
+  .form-control.is-invalid~.invalid-tooltip {
+    display: block;
+  }
+
+  .file-upload-container {
+    border: 2px dashed #dee2e6;
+    transition: all 0.3s ease;
+    background: rgba(46, 204, 113, 0.05);
+  }
+
+  .file-upload-container:hover {
+    border-color: #27ae60;
+    background: rgba(46, 204, 113, 0.1);
+  }
+
+  .file-upload-container.dragover {
+    border-color: #27ae60;
+    background: rgba(46, 204, 113, 0.15);
+    transform: scale(1.02);
+  }
+
+  .btn-premium {
+    background: linear-gradient(135deg, #2ecc71, #27ae60);
+    border: none;
+    color: white;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(46, 204, 113, 0.3);
+  }
+
+  .btn-premium:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(46, 204, 113, 0.4);
+    color: white;
+  }
+
+  .toggle-password {
+    border-radius: 0 10px 10px 0 !important;
+  }
+</style>
+
+<script>
+  (function () {
+    'use strict';
+
+    const form = document.querySelector('form');
+    const passwordInput = document.getElementById('password');
+    const togglePasswordButton = document.querySelector('.toggle-password');
+    const progressBar = document.querySelector('.progress-bar');
+    const strengthText = document.querySelector('.password-strength-text');
+    const fileInput = document.getElementById('profile_image');
+    const fileName = document.querySelector('.file-name');
+    const fileUploadContainer = document.querySelector('.file-upload-container');
+
+    
+    form.addEventListener('submit', function (event) {
+      if (!form.checkValidity()) {
+        event.preventDefault();
+        event.stopPropagation();
+      }
+
+      form.classList.add('was-validated');
+    }, false);
+
+
+    togglePasswordButton.addEventListener('click', function () {
+      const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+      passwordInput.setAttribute('type', type);
+
+    
+      const icon = this.querySelector('i');
+      icon.classList.toggle('bi-eye');
+      icon.classList.toggle('bi-eye-slash');
+    });
+
+
+    passwordInput.addEventListener('input', function () {
+      const password = this.value;
+      let strength = 0;
+      let text = '';
+
+      if (password.length > 0) {
+       
+        if (password.length >= 6) strength += 25;
+        if (password.length >= 8) strength += 25;
+        if (/[A-Z]/.test(password)) strength += 25;
+        if (/[0-9]/.test(password)) strength += 25;
+
+      
+        if (strength < 50) {
+          progressBar.classList.remove('bg-warning', 'bg-success');
+          progressBar.classList.add('bg-danger');
+          text = 'Weak password';
+        } else if (strength < 75) {
+          progressBar.classList.remove('bg-danger', 'bg-success');
+          progressBar.classList.add('bg-warning');
+          text = 'Medium password';
+        } else {
+          progressBar.classList.remove('bg-danger', 'bg-warning');
+          progressBar.classList.add('bg-success');
+          text = 'Strong password';
+        }
+      } else {
+        text = 'Password strength';
+      }
+
+      progressBar.style.width = strength + '%';
+      strengthText.textContent = text;
+    });
+
+ 
+    fileInput.addEventListener('change', function () {
+      if (this.files.length > 0) {
+        fileName.textContent = this.files[0].name;
+      } else {
+        fileName.textContent = 'No file selected';
+      }
+    });
+
+
+    ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+      fileUploadContainer.addEventListener(eventName, preventDefaults, false);
+    });
+
+    function preventDefaults(e) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
+
+    ['dragenter', 'dragover'].forEach(eventName => {
+      fileUploadContainer.addEventListener(eventName, highlight, false);
+    });
+
+    ['dragleave', 'drop'].forEach(eventName => {
+      fileUploadContainer.addEventListener(eventName, unhighlight, false);
+    });
+
+    function highlight() {
+      fileUploadContainer.classList.add('dragover');
+    }
+
+    function unhighlight() {
+      fileUploadContainer.classList.remove('dragover');
+    }
+
+    fileUploadContainer.addEventListener('drop', handleDrop, false);
+
+    function handleDrop(e) {
+      const dt = e.dataTransfer;
+      const files = dt.files;
+      fileInput.files = files;
+
+      if (files.length > 0) {
+        fileName.textContent = files[0].name;
+      }
+    }
+  })();
+</script>
+{% endblock %}
